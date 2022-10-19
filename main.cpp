@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDebug>
+#include <QQuickView>
 
 #include "sensor.h"
 #include "data.h"
@@ -15,30 +16,44 @@ int main(int argc, char *argv[])
 
     //Sensor inverterTemp; //
     qmlRegisterType< Sensor >("Fed", 1, 0, "Sensor");
+
     // Data generator
       Data *data = new Data(&app);
       Sensor rpmCounter(Data::RPM, 100000, 0);
-      Sensor currentSpeed(Data::SPEED, 200, 0);
+      Sensor *currentSpeed = new Sensor(Data::SPEED, 200, 0);
       Sensor valuePower(Data::POWER_LIMITER, 100, 0);
       Sensor temp_HV(Data::BMS_HV_TEMP, 40, 20);
       Sensor temp_LV(Data::BMS_LV_TEMP, 50, 20);
       Sensor temp_INVERT(Data::INVERTER_TEMP, 70, 20);
-      Sensor temp_MOTOR(Data::);
-      Sensor volt_HV(); //remaning battery charge
-      Sensor volt_LV();
-      Sensor current_();
+      Sensor temp_MOTOR(Data::MOTOR_TEMP, 80, 20);
+      Sensor volt_HV(Data::BMS_HV_VOLTAGE, 460, 350); //remaning battery charge
+      Sensor volt_LV(Data::BMS_LV_VOLTAGE, 18, 12);
+      Sensor current(Data::BMS_LV_CURRENT, 30, 0);
 
 
 
-     qDebug() << sensore.value();
+      QObject::connect(data, &Data::dataReceived, &rpmCounter, &Sensor::getData);
+      QObject::connect(data, &Data::dataReceived, currentSpeed, &Sensor::getData);
 
-     QObject::connect(data, &Data::dataReceived, &sensore, &Sensor::getData);
+      currentSpeed->setValue(12);
+       QQuickView *view = new QQuickView;
+       QQmlContext *context = view->engine()->rootContext();
 
 
 
-    for(int i=0; i< 2000000000; i++);
+       //context->setContextProperty("currentSpeed", currentSpeed);
 
-     qDebug ()<< sensore.value();
+
+
+    // qDebug() << sensore.value();
+
+    // QObject::connect(data, &Data::dataReceived, &sensore, &Sensor::getData);
+
+
+
+   // for(int i=0; i< 2000000000; i++);
+
+   //  qDebug ()<< sensore.value();
 
      //qDebug() << sensore.temp();
 
@@ -57,8 +72,8 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    //QQmlContext * rootContext = engine.rootContext();
-    //rootContext->setContextProperty("inverterTemp", &inverterTemp);
+    QQmlContext * rootContext = engine.rootContext();
+    rootContext->setContextProperty("currentSpeed", currentSpeed);
 
     return app.exec();
 }

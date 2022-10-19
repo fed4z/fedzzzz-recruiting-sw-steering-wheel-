@@ -41,7 +41,7 @@ public:
 private slots:
   void generateData() {
     Sensor sensor = static_cast<Sensor>(QRandomGenerator::global()->generate() % Sensor::_SENSOR_SIZE);
-    //emit dataReceived(SPEED, QRandomGenerator::global()->bounded(15000.0f)); return; //
+
     switch (sensor) {
       case RPM: emit dataReceived(sensor, QRandomGenerator::global()->bounded(15000.0f)); return;
       case SPEED: emit dataReceived(sensor, QRandomGenerator::global()->bounded(120.0f)); return;

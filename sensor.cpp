@@ -4,7 +4,7 @@
 
 
 Sensor::Sensor(Data::Sensor type, int max_value, int min_value)
-  : m_value(3), sensorType(type), max_val(max_value), min_val(min_value)
+  : m_value(8), sensorType(type), max_val(max_value), min_val(min_value)
 {
 }
 

@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.12
+
 import Fed 1.0
 
 import "./UI/components"
@@ -45,7 +46,9 @@ Window {
 
             Text {
                 id: provvisorio
+                color: "white"
                 text:"fede" //sensor.getTemp();
+                font.pixelSize: smallFont
                 Layout.fillHeight: true
                 Layout.fillWidth: true
             }
@@ -65,7 +68,7 @@ Window {
 
             TextLabel {
                 id: speed
-                number: 86
+                number: currentSpeed.value;
                 label: "km/h"
                 size: bigFont
                 Layout.fillHeight: true
