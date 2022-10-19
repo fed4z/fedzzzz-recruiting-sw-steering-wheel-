@@ -9,7 +9,7 @@ class StateOfSensors : public QObject
 {
     Q_OBJECT
 
-    //da aggiungere ancora sensori
+    Sensor
 
 
 public:
