@@ -3,8 +3,8 @@
 #include <QDebug>
 
 
-Sensor::Sensor(Data::Sensor type, int max_value, int min_value)
-  :m_error(false), m_value(8), sensorType(type), max_val(max_value), min_val(min_value)
+Sensor::Sensor(Data::Sensor type, float max_value, float min_value)
+  :m_error(false), m_value(0), sensorType(type), max_val(max_value), min_val(min_value)
 {
 }
 
@@ -12,13 +12,20 @@ Sensor::Sensor(Data::Sensor type, int max_value, int min_value)
 
 void Sensor::checkBound(){
     if(m_value < min_val || m_value > max_val ){
-        //m_error = true;
-        qDebug() << "ERROR!"<< m_value ;
-        //emit outOfBound();
+       if(m_error == false ){
+           m_error = true;
+           emit errorChanged();
+       }
+
+    }else{
+        if(m_error == true){
+            m_error = false;
+            emit errorChanged();
+        }
     }
 }
 
-void Sensor::setValue(int newValue){
+void Sensor::setValue(float newValue){
     if(m_value != newValue ){
         m_value = newValue;
         qDebug() << "value changed";
@@ -30,14 +37,14 @@ void Sensor::setValue(int newValue){
 
 void Sensor::getData(Data::Sensor sensor, float data){
     if(sensor == this->sensorType){
-        m_value = (int) data;
+        m_value = data;
         checkBound();
        // qDebug() << m_value;
         emit valueChanged();
     }
 }
 
-int Sensor::value() {
+float Sensor::value() {
     return m_value;
 }
 

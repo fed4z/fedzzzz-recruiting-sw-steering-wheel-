@@ -46,18 +46,19 @@ Window {
             anchors {
                 top: mainBackground.top
                 horizontalCenter: mainBackground.horizontalCenter
-                topMargin: 30
+                topMargin: 20
             }
 
             PowerBar {
                 id: powerBar
                 percentage: valuePower.value
+                label: "POWER"
             }
         }
 
         ColumnLayout {
             id: centerColumn
-            spacing: 100
+            spacing: 90
             width: parent.width/3
 
             anchors {
@@ -68,6 +69,7 @@ Window {
 
             TextLabel {
                 id: speed
+                color: "darkblue"
                 number: currentSpeed.value;
                 label: "km/h"
                 size: bigFont
@@ -139,7 +141,7 @@ Window {
 
         GridLayout {
             id: leftGrid
-            columnSpacing: verticalSpacing*0.5
+            columnSpacing: verticalSpacing*0.4
             rowSpacing: verticalSpacing
             width: parent.width/3
            // height: fillHeight
