@@ -1,26 +1,36 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 
+
 Item {
+   // id: main
     property int number: number.text
     property string label: label.text
     property string unit: unit.text
     property int size: number.font.pixelSize
+    property bool error: false
 
 
-    width: number.width
     height: number.height
+    width: parent.width
+
+   // z: -2
 
     Text {
         id: number
-        color: "white"
+        color: (error) ? "red" : "white"
         text: parent.number
         font.pixelSize: parent.size
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+        }
     }
 
     Text {
         id: unit
-        color: "white"
+        color: (error) ? "red" : "white"
+       // visible: parent.hidden ? true : false
         font.pixelSize: number.font.pixelSize*(0.3)
         text: parent.unit
         anchors {
@@ -32,12 +42,12 @@ Item {
 
     Text {
         id: label
-        color: "white"
+        color: (error) ? "red" : "white"
         font.pixelSize: number.font.pixelSize*(0.3)
         text: parent.label
         anchors{
             top: number.bottom
-            horizontalCenter: number.horizontalCenter
+            horizontalCenter: parent.horizontalCenter
             topMargin: -10
         }
 

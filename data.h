@@ -41,7 +41,8 @@ public:
 private slots:
   void generateData() {
     Sensor sensor = static_cast<Sensor>(QRandomGenerator::global()->generate() % Sensor::_SENSOR_SIZE);
-
+    emit BMS_LV_VOLTAGE: emit dataReceived(BMS_LV_VOLTAGE, 19.0); return; //
+/*
     switch (sensor) {
       case RPM: emit dataReceived(sensor, QRandomGenerator::global()->bounded(15000.0f)); return;
       case SPEED: emit dataReceived(sensor, QRandomGenerator::global()->bounded(120.0f)); return;
@@ -54,7 +55,7 @@ private slots:
       case BMS_LV_VOLTAGE: emit dataReceived(sensor, 12.0f + QRandomGenerator::global()->bounded(6.0f)); return;
       case BMS_LV_CURRENT: emit dataReceived(sensor, QRandomGenerator::global()->bounded(30.0f)); return;
       default: return;
-    }
+    }*/
   };
 
 signals:

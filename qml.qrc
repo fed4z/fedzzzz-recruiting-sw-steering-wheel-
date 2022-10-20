@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>UI/components/TextLabel.qml</file>
         <file>UI/components/TextLabelUnit.qml</file>
+        <file>UI/components/PowerBar.qml</file>
     </qresource>
 </RCC>

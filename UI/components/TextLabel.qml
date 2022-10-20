@@ -1,15 +1,13 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 
-
-
 Item {
     property int number: number.text
     property string label: label.text
     property string unit: unit.text
     property int size: number.font.pixelSize
 
-    width: number.width
+    width: parent.width
     height: number.height
 
     Text {
@@ -17,18 +15,22 @@ Item {
         color: "white"
         text: parent.number
         font.pixelSize: parent.size
-        anchors.centerIn: parent
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+        }
     }
 
     Text {
         id: label
         color: "white"
-        font.pixelSize: number.font.pixelSize*(0.3)
+        font.pixelSize: size*(0.3)
         text: parent.label
         anchors{
             top: number.bottom
-            horizontalCenter: number.horizontalCenter
+            horizontalCenter: parent.horizontalCenter
             topMargin: -10
         }
+
     }
 }
