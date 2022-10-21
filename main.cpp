@@ -4,8 +4,9 @@
 #include <QDebug>
 #include <QQuickView>
 
-#include "sensor.h"
-#include "data.h"
+#include "headers/sensor.h"
+#include "headers/data.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -14,75 +15,38 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
-    //Sensor inverterTemp; //
-    qmlRegisterType< Sensor >("Fed", 1, 0, "Sensor");
-
     // Data generator
-      Data *data = new Data(&app);
-      Sensor rpmCounter(Data::RPM, 100000, 0);
-      //Sensor *currentSpeed = new Sensor(Data::SPEED, 200, 0);
-      Sensor currentSpeed(Data::SPEED, 200, 0);
-      Sensor valuePower(Data::POWER_LIMITER, 100, 0);
-      Sensor temp_HV(Data::BMS_HV_TEMP, 40, 20);
-      Sensor temp_LV(Data::BMS_LV_TEMP, 50, 20);
-      Sensor temp_INVERT(Data::INVERTER_TEMP, 70, 20);
-      Sensor temp_MOTOR(Data::MOTOR_TEMP, 80, 20);
-      Sensor volt_HV(Data::BMS_HV_VOLTAGE, 460, 350); //remaining battery charge
-      Sensor volt_LV(Data::BMS_LV_VOLTAGE, 18, 12);
-      Sensor current(Data::BMS_LV_CURRENT, 30, 0);
+    Data *data = new Data(&app);
+
+    //added sensors
+    Sensor rpmCounter(Data::RPM, 100000, 0);
+    Sensor currentSpeed(Data::SPEED, 200, 0);
+    Sensor valuePower(Data::POWER_LIMITER, 100, 0);
+    Sensor temp_HV(Data::BMS_HV_TEMP, 40, 20);
+    Sensor temp_LV(Data::BMS_LV_TEMP, 50, 20);
+    Sensor temp_INVERT(Data::INVERTER_TEMP, 70, 20);
+    Sensor temp_MOTOR(Data::MOTOR_TEMP, 80, 20);
+    Sensor volt_HV(Data::BMS_HV_VOLTAGE, 460, 350); //remaining battery charge
+    Sensor volt_LV(Data::BMS_LV_VOLTAGE, 18, 12);
+    Sensor current(Data::BMS_LV_CURRENT, 30, 0);
 
 
-
-      QObject::connect(data, &Data::dataReceived, &rpmCounter, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &currentSpeed, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &valuePower, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &temp_HV, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &temp_LV, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &temp_INVERT, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &temp_MOTOR, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &volt_HV, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &volt_LV, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &current, &Sensor::getData);
-      /*QObject::connect(data, &Data::dataReceived, &rpmCounter, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, currentSpeed, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &rpmCounter, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, currentSpeed, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &rpmCounter, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, currentSpeed, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, &rpmCounter, &Sensor::getData);
-      QObject::connect(data, &Data::dataReceived, currentSpeed, &Sensor::getData);*/
-
-
-      //currentSpeed->setValue(12);
-      // QQuickView *view = new QQuickView;
-      // QQmlContext *context = view->engine()->rootContext();
-
-
-
-       //context->setContextProperty("currentSpeed", currentSpeed);
-
-
-
-    // qDebug() << sensore.value();
-
-    // QObject::connect(data, &Data::dataReceived, &sensore, &Sensor::getData);
-
-
-
-   // for(int i=0; i< 2000000000; i++);
-
-   //  qDebug ()<< sensore.value();
-
-     //qDebug() << sensore.temp();
-
-      // You can received data using Qt Signals and Slots.
-      // https://doc.qt.io/qt-5/signalsandslots.html
-
-      // example:
-      // QObject::connect(data, &Data::dataReceived, backend, &Backend::ingestData);
+    //connecting data generator to sensors
+    QObject::connect(data, &Data::dataReceived, &rpmCounter, &Sensor::getData);
+    QObject::connect(data, &Data::dataReceived, &currentSpeed, &Sensor::getData);
+    QObject::connect(data, &Data::dataReceived, &valuePower, &Sensor::getData);
+    QObject::connect(data, &Data::dataReceived, &temp_HV, &Sensor::getData);
+    QObject::connect(data, &Data::dataReceived, &temp_LV, &Sensor::getData);
+    QObject::connect(data, &Data::dataReceived, &temp_INVERT, &Sensor::getData);
+    QObject::connect(data, &Data::dataReceived, &temp_MOTOR, &Sensor::getData);
+    QObject::connect(data, &Data::dataReceived, &volt_HV, &Sensor::getData);
+    QObject::connect(data, &Data::dataReceived, &volt_LV, &Sensor::getData);
+    QObject::connect(data, &Data::dataReceived, &current, &Sensor::getData);
 
     QQmlApplicationEngine engine;
 
+
+    //connecting sensors to QML layer
     QQmlContext * rootContext = engine.rootContext();
     rootContext->setContextProperty("rpmCounter", &rpmCounter);
     rootContext->setContextProperty("currentSpeed", &currentSpeed);
@@ -103,8 +67,6 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-
-    //si può fare con una sola funzione?
 
 
 

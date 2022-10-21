@@ -23,7 +23,7 @@ signals:
 
 public slots:
     void setValue( float );
-    void getData(Data::Sensor sensor, float data);
+    void getData(Data::Sensor sensor, float data); //function to retrieve data and signal to QML component
 
 private:
     Data::Sensor sensorType;

@@ -1,5 +1,5 @@
-#include "sensor.h"
-#include "data.h"
+#include "headers/sensor.h"
+#include "headers/data.h"
 #include <QDebug>
 
 
@@ -28,7 +28,7 @@ void Sensor::checkBound(){
 void Sensor::setValue(float newValue){
     if(m_value != newValue ){
         m_value = newValue;
-        qDebug() << "value changed";
+       // qDebug() << "value changed";
         emit valueChanged();
     }
 }

@@ -29,7 +29,7 @@ public:
 
   Data(QObject *parent = nullptr) : QObject(parent) {
     _clock = new QTimer();
-    _clock->setInterval(1000); // every second default to 1000
+    _clock->setInterval(1000);
     _clock->start();
     connect(_clock, &QTimer::timeout, this, &Data::generateData);
   }
@@ -41,8 +41,6 @@ public:
 private slots:
   void generateData() {
     Sensor sensor = static_cast<Sensor>(QRandomGenerator::global()->generate() % Sensor::_SENSOR_SIZE);
-    //emit BMS_LV_VOLTAGE: emit dataReceived(BMS_LV_VOLTAGE, 19.0); return; //
-
     switch (sensor) {
       case RPM: emit dataReceived(sensor, QRandomGenerator::global()->bounded(15000.0f)); return;
       case SPEED: emit dataReceived(sensor, QRandomGenerator::global()->bounded(120.0f)); return;

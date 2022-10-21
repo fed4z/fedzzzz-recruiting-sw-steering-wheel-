@@ -3,7 +3,6 @@ import QtQuick.Layouts 1.12
 
 
 Item {
-   // id: main
     property int number: number.text
     property string label: label.text
     property string unit: unit.text
@@ -13,8 +12,6 @@ Item {
 
     height: number.height
     width: parent.width
-
-   // z: -2
 
     Text {
         id: number
@@ -30,7 +27,6 @@ Item {
     Text {
         id: unit
         color: (error) ? "red" : "white"
-       // visible: parent.hidden ? true : false
         font.pixelSize: number.font.pixelSize*(0.3)
         text: parent.unit
         anchors {

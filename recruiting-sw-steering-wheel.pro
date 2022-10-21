@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        sensor.cpp
+    sources/sensor.cpp\
+
 
 RESOURCES += qml.qrc
 
@@ -31,5 +32,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    data.h \
-    sensor.h
+    headers/data.h \
+    headers/sensor.h \
+

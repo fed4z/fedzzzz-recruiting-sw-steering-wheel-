@@ -3,8 +3,6 @@ import QtQuick.Window 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.5
 
-import Fed 1.0
-
 import "./UI/components"
 
 
@@ -16,26 +14,17 @@ Window {
     visible: true
     title: qsTr("SteeringWheel")
 
-    /*
-    Loader {
-        id: mainLoader
-        anchors.fill: parent
-        source: "./UI/Screen/Screen.qml"
-    }*/
-
-
 
         property int margin: 50
         property int smallFont: 50
         property int  mediumFont: 70
         property int bigFont: 150
-        //property int cellDimensions: 100
         property int verticalSpacing: 30
 
         Rectangle {
             id: mainBackground
             anchors.fill: parent
-            color: "#36454F" // add to style sheet
+            color:"#36454F"
         }
 
 
@@ -82,6 +71,7 @@ Window {
                 id: rpm
                 number: rpmCounter.value;
                 label: "RPM"
+                color: "white"
                 size: mediumFont
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -110,7 +100,6 @@ Window {
                 size: smallFont
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-             //   anchors.horizontalCenter: parent.horizontalCenter
             }
 
 
@@ -144,7 +133,6 @@ Window {
             columnSpacing: verticalSpacing*0.4
             rowSpacing: verticalSpacing
             width: parent.width/3
-           // height: fillHeight
 
             rows: 3
             columns: 2
@@ -153,7 +141,6 @@ Window {
                 bottom: parent.bottom
                 left: parent.left
                 bottomMargin: margin
-               // leftMargin: margin
             }
 
             TextLabelUnit {

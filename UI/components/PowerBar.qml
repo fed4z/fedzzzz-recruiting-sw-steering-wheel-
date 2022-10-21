@@ -33,14 +33,13 @@ Item {
                 width: bar.visualPosition * parent.width
                 height: parent.height
                 radius: 2
-                color: "Green"
+                color: "darkblue"
             }
         }
     }
 
     Text {
         color: "white"
-
         text: intPercentage
         font.pixelSize: 30
         anchors.centerIn: bar
@@ -51,10 +50,6 @@ Item {
         text: label
         font.pixelSize: 20
         anchors {
-            /*
-            verticalCenter: bar.verticalCenter
-            left: bar.right
-            */
             horizontalCenter: bar.horizontalCenter
             top: bar.bottom
         }
