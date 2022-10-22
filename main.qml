@@ -93,10 +93,10 @@ Window {
             }
 
             TextLabelUnit {
-                id: optional
-                number: 0
-                label: "--"
-                unit: "--"
+                id: sensorLvCurrent
+                number: current.value
+                label: "LV CURRENT"
+                unit: "A"
                 size: smallFont
                 Layout.fillHeight: true
                 Layout.fillWidth: true

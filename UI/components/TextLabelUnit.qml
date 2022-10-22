@@ -3,10 +3,10 @@ import QtQuick.Layouts 1.12
 
 
 Item {
-    property int number: number.text
-    property string label: label.text
-    property string unit: unit.text
-    property int size: number.font.pixelSize
+    property int number
+    property string label
+    property string unit
+    property int size
     property bool error: false
 
 
