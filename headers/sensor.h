@@ -18,17 +18,23 @@ public:
     float value();
 
 signals:
+
+    //signal to notify that value has changed
     void valueChanged();
+
+    //signal to notify that the error state has changed
     void errorChanged();
 
 public slots:
     void setValue( float );
-    void getData(Data::Sensor sensor, float data); //function to retrieve data and signal to QML component
+
+    //function to retrieve data and signal the change to QML component
+    void getData(Data::Sensor sensor, float data);
 
 private:
     Data::Sensor sensorType;
-    float m_value;
-    bool m_error;
+    float m_value; //this variable stores the value to be displayed on the screen
+    bool m_error; //this variable indicates the state of the sensor, if the last sensed value was out of declared bounds or not
     float max_val;
     float min_val;
 
